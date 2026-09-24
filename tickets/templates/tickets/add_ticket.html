@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Ticket</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f6f7fb; }
+        .container { max-width: 650px; margin: auto; background: white; padding: 30px; border-radius: 10px; }
+        label { display: block; margin-top: 14px; font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 10px; margin-top: 6px; box-sizing: border-box; }
+        button { margin-top: 20px; padding: 10px 16px; cursor: pointer; }
+        a { margin-left: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Add Support Ticket</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Ticket ID</label>
+        <input type="text" name="ticket_id" placeholder="T1001" required>
+
+        <label>Customer</label>
+        <input type="text" name="customer" placeholder="Asha" required>
+
+        <label>Issue</label>
+        <textarea name="issue" rows="5" placeholder="Customer cannot log in" required></textarea>
+
+        <label>Priority</label>
+        <select name="priority">
+            <option value="High">High</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Low">Low</option>
+        </select>
+
+        <button type="submit">Create Ticket</button>
+        <a href="{% url 'home' %}">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

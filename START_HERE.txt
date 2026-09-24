@@ -1,0 +1,27 @@
+DJANGO HELPDESK - START HERE
+
+1) Open this folder in VS Code.
+2) Open Terminal -> New Terminal.
+3) Windows PowerShell commands:
+
+   python -m venv venv
+   venv\Scripts\activate
+   python -m pip install -r requirements.txt
+   python manage.py migrate
+   python manage.py runserver
+
+4) Open in browser:
+   http://127.0.0.1:8000/
+
+5) Optional admin:
+   python manage.py createsuperuser
+   Then open http://127.0.0.1:8000/admin/
+
+Main teaching flow:
+Browser -> URL -> View -> Model -> SQLite -> Template -> Browser
+
+Project features:
+- View tickets
+- Add ticket
+- Close ticket
+- Django admin

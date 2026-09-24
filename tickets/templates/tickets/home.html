@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helpdesk Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f6f7fb; }
+        .container { max-width: 1000px; margin: auto; }
+        .top { display: flex; justify-content: space-between; align-items: center; }
+        a.button { background: #222; color: white; padding: 10px 16px; text-decoration: none; border-radius: 6px; }
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background: #eee; }
+        .open { color: #b25b00; font-weight: bold; }
+        .closed { color: green; font-weight: bold; }
+        .close { color: #1f4f99; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top">
+        <div>
+            <h1>Helpdesk Dashboard</h1>
+            <p>Simple Django Ticket Management System</p>
+        </div>
+        <a class="button" href="{% url 'add_ticket' %}">+ Add Ticket</a>
+    </div>
+
+    {% if tickets %}
+    <table>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Customer</th>
+            <th>Issue</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.ticket_id }}</td>
+            <td>{{ ticket.customer }}</td>
+            <td>{{ ticket.issue }}</td>
+            <td>{{ ticket.priority }}</td>
+            <td class="{% if ticket.status == 'Closed' %}closed{% else %}open{% endif %}">
+                {{ ticket.status }}
+            </td>
+            <td>
+                {% if ticket.status != 'Closed' %}
+                    <a class="close" href="{% url 'close_ticket' ticket.id %}">Close</a>
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No tickets found. Click <strong>Add Ticket</strong> to create one.</p>
+    {% endif %}
+</div>
+</body>
+</html>
